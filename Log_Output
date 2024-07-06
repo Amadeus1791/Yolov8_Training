@@ -1,0 +1,778 @@
+Ultralytics YOLOv8.2.35 🚀 Python-3.10.12 torch-2.3.0+cu121 CUDA:0 (NVIDIA L4, 22700MiB)
+engine/trainer: task=detect, mode=train, model=yolov8l.pt, data=data/face_mask.yaml, epochs=100, time=None, patience=10, batch=8, imgsz=640, save=True, save_period=-1, cache=False, device=0, workers=4, project=7, name=yolov8_face_mask, exist_ok=False, pretrained=True, optimizer=auto, verbose=True, seed=0, deterministic=True, single_cls=False, rect=False, cos_lr=False, close_mosaic=10, resume=False, amp=True, fraction=1.0, profile=False, freeze=None, multi_scale=False, overlap_mask=True, mask_ratio=4, dropout=0.0, val=True, split=val, save_json=False, save_hybrid=False, conf=None, iou=0.7, max_det=300, half=False, dnn=False, plots=True, source=None, vid_stride=1, stream_buffer=False, visualize=False, augment=False, agnostic_nms=False, classes=None, retina_masks=False, embed=None, show=False, save_frames=False, save_txt=False, save_conf=False, save_crop=False, show_labels=True, show_conf=True, show_boxes=True, line_width=None, format=torchscript, keras=False, optimize=False, int8=False, dynamic=False, simplify=False, opset=None, workspace=4, nms=False, lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, dfl=1.5, pose=12.0, kobj=1.0, label_smoothing=0.0, nbs=64, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, bgr=0.0, mosaic=1.0, mixup=0.0, copy_paste=0.0, auto_augment=randaugment, erasing=0.4, crop_fraction=1.0, cfg=None, tracker=botsort.yaml, save_dir=7/yolov8_face_mask
+Downloading https://ultralytics.com/assets/Arial.ttf to '/root/.config/Ultralytics/Arial.ttf'...
+100% 755k/755k [00:00<00:00, 116MB/s]
+Overriding model.yaml nc=80 with nc=3
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1      1856  ultralytics.nn.modules.conv.Conv             [3, 64, 3, 2]                 
+  1                  -1  1     73984  ultralytics.nn.modules.conv.Conv             [64, 128, 3, 2]               
+  2                  -1  3    279808  ultralytics.nn.modules.block.C2f             [128, 128, 3, True]           
+  3                  -1  1    295424  ultralytics.nn.modules.conv.Conv             [128, 256, 3, 2]              
+  4                  -1  6   2101248  ultralytics.nn.modules.block.C2f             [256, 256, 6, True]           
+  5                  -1  1   1180672  ultralytics.nn.modules.conv.Conv             [256, 512, 3, 2]              
+  6                  -1  6   8396800  ultralytics.nn.modules.block.C2f             [512, 512, 6, True]           
+  7                  -1  1   2360320  ultralytics.nn.modules.conv.Conv             [512, 512, 3, 2]              
+  8                  -1  3   4461568  ultralytics.nn.modules.block.C2f             [512, 512, 3, True]           
+  9                  -1  1    656896  ultralytics.nn.modules.block.SPPF            [512, 512, 5]                 
+ 10                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 11             [-1, 6]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 12                  -1  3   4723712  ultralytics.nn.modules.block.C2f             [1024, 512, 3]                
+ 13                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 14             [-1, 4]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 15                  -1  3   1247744  ultralytics.nn.modules.block.C2f             [768, 256, 3]                 
+ 16                  -1  1    590336  ultralytics.nn.modules.conv.Conv             [256, 256, 3, 2]              
+ 17            [-1, 12]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 18                  -1  3   4592640  ultralytics.nn.modules.block.C2f             [768, 512, 3]                 
+ 19                  -1  1   2360320  ultralytics.nn.modules.conv.Conv             [512, 512, 3, 2]              
+ 20             [-1, 9]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 21                  -1  3   4723712  ultralytics.nn.modules.block.C2f             [1024, 512, 3]                
+ 22        [15, 18, 21]  1   5585113  ultralytics.nn.modules.head.Detect           [3, [256, 512, 512]]          
+Model summary: 365 layers, 43632153 parameters, 43632137 gradients, 165.4 GFLOPs
+
+Transferred 589/595 items from pretrained weights
+TensorBoard: Start with 'tensorboard --logdir 7/yolov8_face_mask', view at http://localhost:6006/
+Freezing layer 'model.22.dfl.conv.weight'
+AMP: running Automatic Mixed Precision (AMP) checks with YOLOv8n...
+/usr/local/lib/python3.10/dist-packages/torch/nn/modules/conv.py:456: UserWarning: Plan failed with a cudnnException: CUDNN_BACKEND_EXECUTION_PLAN_DESCRIPTOR: cudnnFinalize Descriptor Failed cudnn_status: CUDNN_STATUS_NOT_SUPPORTED (Triggered internally at ../aten/src/ATen/native/cudnn/Conv_v8.cpp:919.)
+  return F.conv2d(input, weight, bias, self.stride,
+AMP: checks passed ✅
+train: Scanning /content/gdrive/MyDrive/yolov8/data/face_mask_dataset/labels/train.cache... 17061 images, 4 backgrounds, 0 corrupt: 100% 17061/17061 [00:00<?, ?it/s]
+WARNING ⚠️ Box and segment counts should be equal, but got len(segments) = 1, len(boxes) = 30799. To resolve this only boxes will be used and all segments will be removed. To avoid this please supply either a detect or segment dataset, not a detect-segment mixed dataset.
+albumentations: Blur(p=0.01, blur_limit=(3, 7)), MedianBlur(p=0.01, blur_limit=(3, 7)), ToGray(p=0.01), CLAHE(p=0.01, clip_limit=(1, 4.0), tile_grid_size=(8, 8))
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+val: Scanning /content/gdrive/MyDrive/yolov8/data/face_mask_dataset/labels/val.cache... 2132 images, 0 backgrounds, 0 corrupt: 100% 2132/2132 [00:00<?, ?it/s]
+Plotting labels to 7/yolov8_face_mask/labels.jpg... 
+optimizer: 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
+optimizer: SGD(lr=0.01, momentum=0.9) with parameter groups 97 weight(decay=0.0), 104 weight(decay=0.0005), 103 bias(decay=0.0)
+TensorBoard: model graph visualization added ✅
+Image sizes 640 train, 640 val
+Using 4 dataloader workers
+Logging results to 7/yolov8_face_mask
+Starting training for 100 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+  0% 0/2133 [00:00<?, ?it/s]/usr/local/lib/python3.10/dist-packages/torch/nn/modules/conv.py:456: UserWarning: Plan failed with a cudnnException: CUDNN_BACKEND_EXECUTION_PLAN_DESCRIPTOR: cudnnFinalize Descriptor Failed cudnn_status: CUDNN_STATUS_NOT_SUPPORTED (Triggered internally at ../aten/src/ATen/native/cudnn/Conv_v8.cpp:919.)
+  return F.conv2d(input, weight, bias, self.stride,
+      1/100      5.62G      1.384      2.559      1.718         27        640:  15% 328/2133 [11:16<37:47,  1.26s/it]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+      1/100      6.07G      1.096      1.201      1.373         20        640: 100% 2133/2133 [1:13:32<00:00,  2.07s/it]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:03<00:21,  5.58it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:26<00:00,  5.12it/s]
+                   all       2132       3763       0.83      0.805      0.864      0.572
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      2/100      5.62G      1.042     0.8567      1.294         64        640:  82% 1742/2133 [06:37<01:31,  4.29it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+      2/100      5.67G      1.047     0.8635      1.297         21        640: 100% 2133/2133 [08:06<00:00,  4.39it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.71it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.71it/s]
+                   all       2132       3763      0.852      0.804      0.869      0.581
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      3/100      5.43G        1.1     0.9343      1.331         36        640:  80% 1706/2133 [06:26<01:36,  4.44it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+      3/100      5.48G      1.101     0.9409      1.332         14        640: 100% 2133/2133 [08:02<00:00,  4.42it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:17,  7.10it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.69it/s]
+                   all       2132       3763      0.823      0.754      0.825      0.542
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      4/100      5.39G       1.11      0.989      1.349         30        640:  11% 227/2133 [00:51<07:20,  4.33it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+      4/100      6.42G      1.123     0.9709      1.342         23        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.28it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.71it/s]
+                   all       2132       3763       0.84      0.797       0.85      0.578
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+  0% 0/2133 [00:00<?, ?it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+      5/100      5.63G      1.074     0.8798      1.309         19        640: 100% 2133/2133 [08:00<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.21it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.72it/s]
+                   all       2132       3763       0.88      0.806      0.879      0.602
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      6/100      5.94G      1.043     0.8224      1.286         31        640:  88% 1874/2133 [07:02<00:59,  4.34it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+      6/100      5.99G      1.042     0.8216      1.284         17        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.18it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.73it/s]
+                   all       2132       3763      0.898      0.829        0.9      0.627
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      7/100      5.85G       1.03     0.7841      1.275         32        640:  79% 1689/2133 [06:20<01:39,  4.48it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+      7/100      5.88G      1.022     0.7806      1.273         10        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.37it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.75it/s]
+                   all       2132       3763      0.882      0.849      0.908      0.635
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      8/100      5.38G     0.9816     0.7271      1.251         37        640:   5% 117/2133 [00:26<07:33,  4.45it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+      8/100      5.58G      1.002     0.7397       1.25         13        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.68it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.74it/s]
+                   all       2132       3763      0.902      0.875      0.926      0.652
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      9/100      5.58G     0.9741     0.7141      1.245         26        640:  32% 682/2133 [02:33<05:36,  4.31it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+      9/100      5.63G     0.9857      0.718      1.245         31        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.55it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.77it/s]
+                   all       2132       3763      0.903      0.864      0.924      0.654
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     10/100      5.37G     0.9561     0.6995      1.239         25        640:  10% 205/2133 [00:46<07:34,  4.24it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     10/100      5.59G     0.9732     0.6952      1.237         56        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.73it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.72it/s]
+                   all       2132       3763      0.918      0.883      0.939      0.667
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     11/100      5.69G     0.9596     0.6781      1.236         28        640:  49% 1048/2133 [03:56<04:11,  4.32it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     11/100      5.74G     0.9608     0.6781      1.233         22        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.51it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.80it/s]
+                   all       2132       3763       0.92      0.889      0.941      0.676
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     12/100      5.38G     0.9274     0.6401      1.213         36        640:  17% 373/2133 [01:24<06:37,  4.43it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     12/100       5.8G     0.9476     0.6533      1.222         19        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.69it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.77it/s]
+                   all       2132       3763      0.921      0.881      0.941      0.682
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     13/100      5.37G     0.9403     0.6391      1.214         18        640:  28% 587/2133 [02:12<05:45,  4.47it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     13/100      5.61G     0.9363     0.6439       1.21          9        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.60it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.72it/s]
+                   all       2132       3763      0.937       0.89      0.945      0.685
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     14/100      5.37G     0.9219     0.6141      1.201         20        640:  23% 484/2133 [01:49<06:12,  4.43it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     14/100      5.66G     0.9335      0.628       1.21         32        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.15it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.73it/s]
+                   all       2132       3763      0.927      0.898      0.946      0.687
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     15/100      5.36G      0.924     0.6197      1.196         33        640:  43% 922/2133 [03:27<04:29,  4.50it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     15/100      5.39G     0.9195     0.6112      1.197          9        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.60it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.70it/s]
+                   all       2132       3763      0.931      0.896       0.95      0.695
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     16/100      5.51G     0.9216     0.6039      1.195         21        640:  60% 1282/2133 [04:49<03:11,  4.44it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     16/100      5.56G     0.9202     0.6037      1.195         27        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.56it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.71it/s]
+                   all       2132       3763      0.927        0.9      0.951      0.698
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     17/100      5.99G     0.9276     0.6016      1.188         25        640:  39% 824/2133 [03:05<04:56,  4.42it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     17/100      6.03G     0.9176      0.601      1.195         16        640: 100% 2133/2133 [08:00<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.38it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.68it/s]
+                   all       2132       3763      0.933      0.901      0.949      0.695
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     18/100       5.6G     0.9041     0.5873      1.187         20        640:  51% 1089/2133 [04:05<03:55,  4.44it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     18/100      5.65G     0.9074     0.5869      1.188         45        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.50it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.73it/s]
+                   all       2132       3763      0.939      0.904      0.955      0.699
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     19/100      5.34G      0.889     0.5765      1.185         16        640:  62% 1318/2133 [04:57<03:00,  4.51it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     19/100      5.61G     0.8974     0.5788      1.185         14        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:17,  7.05it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.72it/s]
+                   all       2132       3763      0.945      0.904      0.958      0.705
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     20/100      5.63G     0.8848     0.5668       1.17         29        640:  46% 984/2133 [03:41<04:14,  4.51it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     20/100      5.68G     0.8918     0.5717      1.177         22        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.54it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.73it/s]
+                   all       2132       3763      0.939       0.91      0.955      0.703
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     21/100      5.37G     0.8918     0.5614      1.179         20        640:  26% 559/2133 [02:06<05:59,  4.38it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     21/100      5.63G      0.899     0.5664      1.183         19        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:18,  6.66it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.71it/s]
+                   all       2132       3763      0.949      0.912      0.958       0.71
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     22/100      5.36G     0.8662     0.5484      1.155        123        640:  11% 234/2133 [00:52<07:10,  4.41it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     22/100      5.79G     0.8906     0.5565      1.171         22        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.76it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.76it/s]
+                   all       2132       3763      0.942      0.913      0.958       0.71
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     23/100      5.35G     0.8792      0.552      1.178         26        640:   7% 157/2133 [00:35<07:30,  4.39it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     23/100      5.61G     0.8774     0.5486      1.169         13        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.61it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.74it/s]
+                   all       2132       3763      0.943      0.917      0.961      0.715
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     24/100      5.54G     0.8757     0.5468      1.167         45        640:  80% 1703/2133 [06:23<01:41,  4.23it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     24/100      5.58G     0.8763     0.5461      1.168         20        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.60it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.75it/s]
+                   all       2132       3763      0.946      0.915      0.963      0.718
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     25/100      5.59G     0.8746     0.5428      1.169         34        640:  67% 1420/2133 [05:20<02:40,  4.44it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     25/100      5.64G     0.8726     0.5409      1.162         19        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.48it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.72it/s]
+                   all       2132       3763      0.951      0.914      0.965      0.717
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     26/100      5.35G     0.8419     0.5216      1.151         38        640:  17% 358/2133 [01:20<06:44,  4.39it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     26/100      5.62G      0.868      0.536      1.156         13        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.30it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.73it/s]
+                   all       2132       3763      0.955      0.913      0.964       0.72
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     27/100      5.23G     0.8608     0.5246      1.149         19        640:  72% 1529/2133 [05:44<02:16,  4.41it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     27/100      5.44G     0.8654     0.5265      1.151         14        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.35it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.73it/s]
+                   all       2132       3763      0.945      0.921      0.963      0.721
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     28/100      5.81G     0.8605     0.5239      1.154         17        640:  92% 1967/2133 [07:23<00:37,  4.48it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     28/100      5.86G     0.8615     0.5242      1.154         12        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.44it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.76it/s]
+                   all       2132       3763      0.941      0.925      0.963      0.721
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     29/100      5.37G      0.774     0.4962      1.158         23        640:   0% 2/2133 [00:00<07:53,  4.50it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     29/100      5.55G     0.8601     0.5234      1.153         17        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.63it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.75it/s]
+                   all       2132       3763      0.954      0.916      0.965      0.723
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     30/100      5.51G     0.8598     0.5166      1.156         19        640:  54% 1150/2133 [04:19<03:38,  4.50it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     30/100      5.56G      0.857     0.5166      1.155         11        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.64it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.77it/s]
+                   all       2132       3763      0.956       0.92      0.965      0.729
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     31/100      5.36G     0.8554     0.5132      1.157         33        640:  25% 533/2133 [02:00<06:04,  4.38it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     31/100      5.57G     0.8556     0.5117      1.155         11        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.51it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.79it/s]
+                   all       2132       3763      0.955      0.918      0.964      0.729
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     32/100      5.39G      0.852     0.5046      1.144         15        640:  22% 472/2133 [01:46<06:17,  4.40it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     32/100      5.65G     0.8515     0.5046      1.148         11        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.41it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.71it/s]
+                   all       2132       3763      0.957      0.923      0.966      0.729
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     33/100      5.75G     0.8363     0.4997      1.136         28        640:  88% 1882/2133 [07:04<00:58,  4.31it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     33/100       5.8G     0.8391        0.5      1.136         24        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.36it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.76it/s]
+                   all       2132       3763      0.952      0.923      0.965      0.728
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     34/100      5.58G     0.8353     0.4974      1.131         22        640:  58% 1232/2133 [04:37<03:22,  4.45it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     34/100      5.63G     0.8428     0.5007      1.139         19        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.48it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.74it/s]
+                   all       2132       3763      0.957       0.92      0.967       0.73
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     35/100      5.32G     0.8313       0.49      1.136         32        640:  40% 857/2133 [03:13<04:50,  4.40it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     35/100      5.37G     0.8351     0.4947      1.138         37        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.39it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.71it/s]
+                   all       2132       3763      0.954      0.924      0.966      0.731
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     36/100      5.64G     0.8368     0.4935      1.136         30        640:  99% 2118/2133 [07:58<00:03,  4.46it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     36/100      5.69G     0.8368     0.4935      1.136         19        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.33it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.69it/s]
+                   all       2132       3763      0.948      0.935      0.966      0.729
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     37/100      5.62G     0.8205     0.4805      1.128         22        640:  62% 1327/2133 [04:59<03:02,  4.42it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     37/100      5.68G     0.8248     0.4829      1.129         14        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.15it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.74it/s]
+                   all       2132       3763      0.951      0.931      0.967      0.734
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     38/100      5.37G     0.8131     0.4744      1.136         58        640:  46% 991/2133 [03:43<04:15,  4.46it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     38/100      5.67G     0.8306     0.4835      1.134         10        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.28it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.71it/s]
+                   all       2132       3763      0.956      0.925      0.967      0.734
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     39/100      5.36G     0.8197      0.478      1.135         21        640:  10% 219/2133 [00:49<07:08,  4.47it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     39/100      5.64G     0.8256     0.4738      1.127         23        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.62it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.78it/s]
+                   all       2132       3763      0.958      0.923      0.967      0.734
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     40/100      5.63G     0.8215     0.4772      1.124         36        640:  78% 1673/2133 [06:17<01:43,  4.43it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     40/100      5.68G      0.821     0.4768      1.127         10        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.64it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.72it/s]
+                   all       2132       3763      0.952      0.929      0.967      0.734
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     41/100      5.38G     0.9112     0.5089      1.127         28        640:   2% 32/2133 [00:07<07:45,  4.51it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     41/100      5.68G     0.8174     0.4702      1.127         12        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.56it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.75it/s]
+                   all       2132       3763      0.956       0.93      0.967      0.735
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     42/100      5.36G     0.8187     0.4702      1.128         23        640:  75% 1600/2133 [06:00<01:59,  4.48it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     42/100      5.41G     0.8169     0.4695      1.126         48        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.58it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.73it/s]
+                   all       2132       3763      0.957      0.929      0.967      0.737
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     43/100      5.77G      0.819     0.4691      1.129         24        640:  59% 1263/2133 [04:44<03:13,  4.49it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     43/100      5.82G     0.8206      0.469      1.127         13        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.57it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.71it/s]
+                   all       2132       3763      0.957      0.931      0.968      0.736
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     44/100      5.37G     0.7973      0.459      1.113         27        640:  15% 321/2133 [01:12<06:42,  4.50it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     44/100      5.55G     0.8097     0.4626      1.118         11        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.17it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.72it/s]
+                   all       2132       3763      0.958      0.931      0.969      0.737
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     45/100       5.6G     0.8019      0.458      1.115         18        640:  84% 1787/2133 [06:42<01:17,  4.46it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     45/100      5.65G     0.8016     0.4573      1.117         40        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.30it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.71it/s]
+                   all       2132       3763      0.957      0.931      0.968      0.737
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     46/100      5.37G     0.7926     0.4542      1.116         46        640:  23% 490/2133 [01:50<06:13,  4.40it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     46/100      5.57G     0.8013     0.4541      1.112         12        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.45it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.78it/s]
+                   all       2132       3763      0.957      0.933       0.97      0.737
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     47/100      5.57G     0.7886     0.4472      1.114         37        640:  72% 1539/2133 [05:47<02:11,  4.50it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     47/100       5.6G     0.7927     0.4527      1.116         31        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.80it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.76it/s]
+                   all       2132       3763      0.959       0.93      0.969      0.738
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     48/100      5.57G     0.7897     0.4474      1.113         29        640:  77% 1650/2133 [06:12<01:53,  4.25it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     48/100      5.62G     0.7925     0.4482      1.113         19        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.64it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.74it/s]
+                   all       2132       3763      0.958      0.932      0.969      0.738
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     49/100       5.5G     0.7907     0.4434      1.108         17        640:  81% 1723/2133 [06:28<01:34,  4.36it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     49/100      5.77G     0.7918     0.4457       1.11         14        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.42it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.72it/s]
+                   all       2132       3763      0.954      0.935      0.969      0.739
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     50/100      5.37G     0.7831     0.4339      1.106         24        640:  29% 612/2133 [02:18<05:38,  4.50it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     50/100      5.64G     0.7902     0.4403       1.11         18        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.64it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.74it/s]
+                   all       2132       3763      0.957      0.932      0.968      0.739
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     51/100      5.34G     0.7825     0.4417      1.099         39        640:  41% 867/2133 [03:15<04:44,  4.46it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     51/100      5.39G     0.7822     0.4384      1.103         17        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.39it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.74it/s]
+                   all       2132       3763      0.951      0.937      0.969       0.74
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     52/100      5.39G     0.7808     0.4365      1.096         53        640:  61% 1298/2133 [04:52<03:05,  4.51it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     52/100      5.44G      0.781     0.4363      1.101         17        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.53it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.74it/s]
+                   all       2132       3763       0.96      0.929      0.969       0.74
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     53/100      5.38G     0.7384     0.4134       1.09         18        640:   4% 85/2133 [00:19<07:34,  4.50it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     53/100      5.43G     0.7756     0.4273      1.099          9        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.43it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.76it/s]
+                   all       2132       3763      0.958       0.93      0.969       0.74
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     54/100      5.36G     0.7506     0.4062      1.091         32        640:  10% 211/2133 [00:47<07:13,  4.43it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     54/100      5.99G     0.7737     0.4264      1.096         13        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.76it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.80it/s]
+                   all       2132       3763      0.958      0.929      0.969      0.741
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     55/100      5.36G     0.7828      0.427      1.098         25        640:  11% 231/2133 [00:52<07:06,  4.46it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     55/100      5.39G     0.7749     0.4293      1.099         29        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.69it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.72it/s]
+                   all       2132       3763      0.959      0.932      0.969      0.741
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     56/100      5.38G       0.76     0.4181      1.092         24        640:  60% 1273/2133 [04:47<03:14,  4.42it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     56/100      5.42G      0.766       0.42      1.096         25        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.34it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.75it/s]
+                   all       2132       3763      0.959      0.932      0.969      0.742
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     57/100      5.38G     0.7645     0.4151      1.093         34        640:  21% 449/2133 [01:41<06:15,  4.48it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     57/100      5.43G     0.7686     0.4194      1.097         15        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.43it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.75it/s]
+                   all       2132       3763      0.959      0.931      0.969      0.742
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     58/100      5.37G     0.7693     0.4189      1.084         40        640:   2% 50/2133 [00:11<07:50,  4.43it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     58/100       5.8G     0.7583     0.4154      1.089         20        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.80it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.74it/s]
+                   all       2132       3763      0.958      0.932      0.969      0.742
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     59/100      5.33G     0.7702     0.4161       1.09         36        640:  24% 511/2133 [01:55<05:59,  4.52it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     59/100      5.72G     0.7551     0.4135      1.089         35        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.46it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.73it/s]
+                   all       2132       3763      0.959      0.932      0.969      0.742
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     60/100      5.38G     0.7574     0.4078      1.087         28        640:  49% 1038/2133 [03:54<04:06,  4.45it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     60/100      5.43G     0.7532     0.4066      1.088         34        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.38it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.75it/s]
+                   all       2132       3763       0.96      0.933      0.969      0.742
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     61/100      5.36G     0.6925     0.3793      1.067         24        640:   2% 33/2133 [00:07<07:53,  4.44it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     61/100      5.61G     0.7512     0.4089      1.084         16        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.27it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.76it/s]
+                   all       2132       3763       0.96       0.93      0.969      0.743
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     62/100      5.74G     0.7452     0.4038       1.08         22        640:  82% 1753/2133 [06:35<01:27,  4.33it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     62/100      5.79G      0.748     0.4051       1.08         10        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.35it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.73it/s]
+                   all       2132       3763      0.961       0.93      0.969      0.743
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     63/100      5.51G     0.7423     0.4023       1.08         26        640:  77% 1647/2133 [06:11<01:49,  4.44it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     63/100      5.54G     0.7419     0.4008       1.08         21        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.14it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.76it/s]
+                   all       2132       3763       0.96      0.931      0.969      0.743
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     64/100      5.38G     0.7407     0.3982       1.08         29        640:  40% 853/2133 [03:12<04:43,  4.51it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     64/100      6.05G      0.742     0.3999      1.081         17        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.27it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.82it/s]
+                   all       2132       3763      0.958      0.934      0.969      0.743
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     65/100      5.38G     0.7328     0.4043      1.078         30        640:  20% 425/2133 [01:35<06:19,  4.51it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     65/100      5.68G     0.7388     0.3987      1.082         12        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.66it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.78it/s]
+                   all       2132       3763      0.958      0.934      0.969      0.743
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     66/100      5.67G     0.7317     0.3953      1.078         21        640:  93% 1991/2133 [07:29<00:32,  4.41it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     66/100      5.73G      0.732     0.3955      1.077         12        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.42it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.80it/s]
+                   all       2132       3763      0.957      0.933      0.969      0.743
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     67/100      5.36G     0.7282     0.3918       1.07         32        640:  64% 1371/2133 [05:09<02:51,  4.45it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     67/100      5.41G     0.7244     0.3901      1.075         10        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.77it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.74it/s]
+                   all       2132       3763      0.957      0.933      0.969      0.744
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     68/100      5.39G     0.7152     0.3796      1.067         22        640:  29% 619/2133 [02:19<05:51,  4.30it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     68/100      5.82G     0.7242     0.3884      1.075         10        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.62it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.73it/s]
+                   all       2132       3763      0.958      0.933      0.969      0.744
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     69/100      5.84G     0.7269     0.3908      1.072         28        640:  28% 606/2133 [02:16<06:05,  4.18it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     69/100      5.89G     0.7194     0.3848      1.071         14        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.22it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.72it/s]
+                   all       2132       3763      0.957      0.933      0.969      0.744
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     70/100      5.74G      0.708     0.3762      1.067         33        640:  78% 1654/2133 [06:12<01:47,  4.47it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     70/100      5.79G     0.7109     0.3767      1.069          9        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.59it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.73it/s]
+                   all       2132       3763      0.958      0.933      0.969      0.744
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     71/100      5.56G      0.708     0.3777      1.069         23        640:  46% 973/2133 [03:39<04:22,  4.41it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     71/100      5.59G       0.71     0.3786      1.069         27        640: 100% 2133/2133 [08:00<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.18it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.72it/s]
+                   all       2132       3763      0.958      0.933      0.969      0.744
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     72/100      5.38G     0.6953     0.3739      1.062         25        640:  18% 385/2133 [01:26<06:36,  4.41it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     72/100      5.64G     0.7038     0.3729      1.065         18        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.14it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.72it/s]
+                   all       2132       3763      0.959      0.932      0.969      0.744
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     73/100      5.37G     0.7011     0.3736      1.057         28        640:  98% 2081/2133 [07:49<00:11,  4.51it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     73/100      5.41G     0.7001      0.373      1.057         14        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.58it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.78it/s]
+                   all       2132       3763      0.959      0.933      0.969      0.744
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     74/100      5.36G      0.727     0.3848      1.054         27        640:  10% 217/2133 [00:49<07:14,  4.41it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     74/100      5.91G     0.7063     0.3735      1.057         13        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.63it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.72it/s]
+                   all       2132       3763      0.958      0.933      0.969      0.745
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     75/100      5.35G      0.692     0.3674      1.054         29        640: 100% 2124/2133 [07:59<00:02,  4.45it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     75/100       5.4G     0.6919     0.3673      1.054         35        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.75it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.79it/s]
+                   all       2132       3763      0.958      0.934      0.969      0.745
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     76/100      5.38G     0.6931     0.3661      1.055         35        640:  83% 1763/2133 [06:37<01:25,  4.33it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     76/100      5.43G     0.6918     0.3661      1.055          8        640: 100% 2133/2133 [08:00<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.43it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.72it/s]
+                   all       2132       3763      0.958      0.934      0.969      0.745
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     77/100      5.38G     0.6905     0.3643      1.051         52        640:  68% 1449/2133 [05:27<02:33,  4.44it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     77/100      5.55G     0.6903     0.3638      1.051         21        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.70it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.72it/s]
+                   all       2132       3763      0.959      0.934       0.97      0.745
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     78/100      5.38G     0.7032     0.3706      1.047         17        640:  10% 204/2133 [00:46<07:15,  4.43it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     78/100      5.87G     0.6867     0.3616       1.05         22        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:17,  7.05it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.70it/s]
+                   all       2132       3763      0.958      0.934       0.97      0.745
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     79/100      5.36G     0.6791     0.3558       1.05         29        640:  24% 511/2133 [01:55<06:04,  4.45it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     79/100      5.86G     0.6803     0.3582      1.046         10        640: 100% 2133/2133 [08:01<00:00,  4.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.37it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.77it/s]
+                   all       2132       3763      0.956      0.935       0.97      0.745
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     80/100      5.38G     0.6842     0.3562      1.044         47        640:  25% 532/2133 [01:59<05:59,  4.45it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     80/100      5.67G     0.6789     0.3546      1.043         19        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.31it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.76it/s]
+                   all       2132       3763      0.956      0.935      0.969      0.746
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     81/100      5.37G     0.6705     0.3518      1.034         29        640:  57% 1220/2133 [04:35<03:27,  4.40it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     81/100      5.42G     0.6709     0.3507      1.039         16        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.56it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.79it/s]
+                   all       2132       3763      0.957      0.934      0.969      0.746
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     82/100       5.5G     0.6583     0.3444      1.034         33        640:  36% 764/2133 [02:52<05:04,  4.50it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     82/100      5.77G      0.668     0.3462      1.037         43        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.47it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.77it/s]
+                   all       2132       3763      0.958      0.934      0.969      0.746
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     83/100       5.6G     0.6591     0.3425      1.034         32        640:  66% 1413/2133 [05:18<02:42,  4.43it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     83/100      5.65G     0.6603     0.3418      1.035         21        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.60it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.71it/s]
+                   all       2132       3763      0.955      0.937      0.969      0.745
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     84/100      5.39G     0.6589     0.3397      1.033         22        640:  33% 701/2133 [02:38<05:22,  4.43it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     84/100      5.76G      0.661     0.3422      1.036         26        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.67it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.76it/s]
+                   all       2132       3763      0.955      0.937      0.969      0.746
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     85/100      5.38G     0.6612      0.344      1.037         47        640:  37% 780/2133 [02:55<05:01,  4.48it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     85/100      5.88G     0.6584     0.3409      1.031         11        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.42it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.74it/s]
+                   all       2132       3763      0.954      0.937       0.97      0.746
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     86/100      5.38G     0.6613     0.3369      1.018         54        640:  11% 243/2133 [00:54<07:11,  4.38it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     86/100      5.62G      0.651     0.3361       1.03         21        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.57it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.72it/s]
+                   all       2132       3763      0.954      0.939       0.97      0.746
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     87/100      5.74G        inf     0.3295      1.022         38        640:  69% 1466/2133 [05:30<02:29,  4.48it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     87/100      5.77G        inf     0.3324      1.024         16        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:17,  6.88it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.73it/s]
+                   all       2132       3763      0.954      0.939      0.969      0.746
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     88/100      5.38G        inf     0.3291       1.02         27        640:  58% 1228/2133 [04:36<03:22,  4.47it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     88/100      5.43G        inf     0.3285       1.02         27        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.26it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.73it/s]
+                   all       2132       3763      0.956      0.938       0.97      0.746
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     89/100      5.38G     0.6345     0.3272      1.023         39        640:  85% 1807/2133 [06:46<01:12,  4.48it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     89/100      5.43G     0.6328     0.3256      1.022         11        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.22it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.74it/s]
+                   all       2132       3763      0.956      0.937       0.97      0.746
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     90/100      5.76G     0.6338      0.327      1.018         56        640:  91% 1949/2133 [07:19<00:42,  4.31it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     90/100      5.81G     0.6346     0.3271      1.018         10        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.67it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.75it/s]
+                   all       2132       3763      0.957      0.937       0.97      0.746
+Closing dataloader mosaic
+albumentations: Blur(p=0.01, blur_limit=(3, 7)), MedianBlur(p=0.01, blur_limit=(3, 7)), ToGray(p=0.01), CLAHE(p=0.01, clip_limit=(1, 4.0), tile_grid_size=(8, 8))
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     91/100      5.35G     0.6525      0.268      1.033         26        640:  70% 1503/2133 [05:38<02:19,  4.50it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     91/100      5.76G     0.6516     0.2677      1.034         18        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.47it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.70it/s]
+                   all       2132       3763      0.957      0.936       0.97      0.746
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     92/100      5.64G     0.6354     0.2616      1.029         15        640:  25% 530/2133 [01:59<05:55,  4.51it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     92/100      5.69G     0.6443     0.2626      1.032          7        640: 100% 2133/2133 [07:59<00:00,  4.45it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:17,  6.93it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.71it/s]
+                   all       2132       3763      0.957      0.936       0.97      0.746
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     93/100       5.6G     0.6366     0.2584      1.024         13        640:  30% 641/2133 [02:24<05:33,  4.47it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     93/100      5.65G     0.6339     0.2566      1.027          6        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.31it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.75it/s]
+                   all       2132       3763      0.959      0.935       0.97      0.746
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     94/100      5.74G     0.6291     0.2546      1.024          9        640:  83% 1766/2133 [06:37<01:21,  4.49it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     94/100      5.79G     0.6271      0.254      1.023          8        640: 100% 2133/2133 [07:59<00:00,  4.45it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.19it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.73it/s]
+                   all       2132       3763      0.959      0.935       0.97      0.746
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     95/100      5.57G     0.6247     0.2534      1.022         10        640:  82% 1753/2133 [06:34<01:24,  4.48it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     95/100      5.61G     0.6219     0.2518      1.021          9        640: 100% 2133/2133 [07:59<00:00,  4.45it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.69it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.75it/s]
+                   all       2132       3763       0.96      0.935       0.97      0.747
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     96/100      5.73G     0.6074     0.2491      1.012         19        640:  47% 999/2133 [03:44<04:27,  4.24it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     96/100      5.78G     0.6123     0.2488      1.016          7        640: 100% 2133/2133 [07:59<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.68it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.73it/s]
+                   all       2132       3763       0.96      0.935       0.97      0.746
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     97/100      5.58G      0.605     0.2434      1.008         10        640:  38% 809/2133 [03:01<04:53,  4.51it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     97/100      5.63G     0.6045     0.2446      1.011         15        640: 100% 2133/2133 [07:59<00:00,  4.45it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.70it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.77it/s]
+                   all       2132       3763      0.959      0.936       0.97      0.746
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     98/100      5.35G     0.5954     0.2363      1.009         30        640:   9% 192/2133 [00:43<07:17,  4.43it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     98/100      5.61G     0.6037     0.2432      1.011          6        640: 100% 2133/2133 [07:59<00:00,  4.45it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:15,  7.61it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.74it/s]
+                   all       2132       3763      0.959      0.936       0.97      0.747
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     99/100       5.6G      0.601     0.2424      1.009         10        640:  95% 2030/2133 [07:37<00:22,  4.50it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+     99/100      5.65G     0.6004      0.242      1.009         11        640: 100% 2133/2133 [08:00<00:00,  4.44it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:16,  7.46it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.76it/s]
+                   all       2132       3763      0.958      0.939       0.97      0.747
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+    100/100      5.39G     0.6057     0.2422      1.006         14        640:  24% 514/2133 [01:55<05:59,  4.50it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+    100/100      5.61G     0.5929     0.2377      1.007          6        640: 100% 2133/2133 [07:59<00:00,  4.45it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:01<00:17,  6.96it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:23<00:00,  5.78it/s]
+                   all       2132       3763      0.958      0.939       0.97      0.747
+
+100 epochs completed in 15.142 hours.
+Optimizer stripped from 7/yolov8_face_mask/weights/last.pt, 87.6MB
+Optimizer stripped from 7/yolov8_face_mask/weights/best.pt, 87.6MB
+
+Validating 7/yolov8_face_mask/weights/best.pt...
+Ultralytics YOLOv8.2.35 🚀 Python-3.10.12 torch-2.3.0+cu121 CUDA:0 (NVIDIA L4, 22700MiB)
+Model summary (fused): 268 layers, 43608921 parameters, 0 gradients, 164.8 GFLOPs
+/usr/local/lib/python3.10/dist-packages/torch/nn/modules/conv.py:456: UserWarning: Plan failed with a cudnnException: CUDNN_BACKEND_EXECUTION_PLAN_DESCRIPTOR: cudnnFinalize Descriptor Failed cudnn_status: CUDNN_STATUS_NOT_SUPPORTED (Triggered internally at ../aten/src/ATen/native/cudnn/Conv_v8.cpp:919.)
+  return F.conv2d(input, weight, bias, self.stride,
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  10% 13/134 [00:04<00:19,  6.15it/s]libpng warning: iCCP: Not recognizing known sRGB profile that has been edited
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% 134/134 [00:25<00:00,  5.31it/s]
+                   all       2132       3763      0.958      0.939       0.97      0.747
+             with_mask        616       1209      0.942      0.944       0.97      0.717
+          without_mask        739       1564      0.945      0.888      0.946      0.655
+        incorrect_mask        974        990      0.988      0.986      0.994      0.868
+Speed: 0.1ms preprocess, 6.7ms inference, 0.0ms loss, 1.6ms postprocess per image
+Results saved to 7/yolov8_face_mask
+💡 Learn more at https://docs.ultralytics.com/modes/train
